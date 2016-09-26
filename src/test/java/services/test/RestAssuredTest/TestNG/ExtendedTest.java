@@ -60,4 +60,25 @@ public class ExtendedTest extends BaseTestNG {
     	
     	;
     }
+    
+    
+    @Test(groups = { GET  },dependsOnMethods = { "personSimpleTest" })
+    public void personTest3()
+    {
+    	httpGetSimpleTest("/personaddress")
+    			 .and()
+                 .body("address",notNullValue())
+                 ;
+                 
+    }
+    
+    @Test(groups = { GET  },dependsOnMethods = { "personTest3" })
+    public void personTest4()
+    {
+    	httpGetSimpleTest("/personaddress")
+    			 .and()
+                 .body("address.housenum",equalTo("1600"))
+                 ;
+                 
+    }
 }
